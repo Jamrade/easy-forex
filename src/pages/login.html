@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyForex</title>
+    <link href="../stylesheets/general.css" rel="stylesheet">
+    <link href="../stylesheets/login.css" rel="stylesheet">
+    <script src="../backend/credentialmanager.js" type="text/javascript" defer></script>
+    <script src="../backend/apihandler.js" type="text/javascript" defer></script>
+    <script src="../backend/login.js" type="text/javascript" defer></script>
+</head>
+<body>
+    <div id="pageDiv">
+        <div id="loginBox">
+            <div id="loginTextBox">
+                <img id="loginLogo" src="../assets/Banner-Logo.png" alt="Logo for tool">
+                <h3 id="loginHeader">Login</h3>
+            </div>
+            <div id="credentialsBox">
+                <div id="usernameBox">
+                    <input id="usernameInput" class="credentialInput" type="text" name="username" placeholder="Username">
+                </div>
+                <div id="passwordBox">
+                    <input id="passwordInput" class="credentialInput" type="text" name="password" placeholder="Password">
+                </div>
+                <div id="appKeyBox">
+                    <input id="apiKeyInput" class="credentialInput" type="text" name="appKey" placeholder="App Key">
+                </div>
+            </div>
+            <div id="loginButtonsBox">
+                <button class="loginButtons" onclick="sendCredentials()" id="login">Login</button>
+                <button class="loginButtons" onclick="window.location.href='https:/www.forex.com/en-us/premium-trader-tools/api-trading/'" id="signUp">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
