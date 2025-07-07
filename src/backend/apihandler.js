@@ -70,5 +70,3 @@ function buildQueryUrl(baseUrl, credentials, parameters=[]) {
 
     return baseUrl
 }
-
-console.log(buildQueryUrl("google.com/", {"UserName": "username", "Password": "password", "AccountId": "accountID", "Session": "sessionToken"},{"searchByMarketName": "True", "MarketName":"AUD/USD"}))
