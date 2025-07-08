@@ -37,12 +37,41 @@ function makeErrorBox(text) {
 
 function sendCredentials() {
 
-    const username = document.getElementById("usernameInput").innerText;
+    const username = document.getElementById("usernameInput").value;
 
-    if(username == null) {
-        throw Error("No Username given")
+    if(username == "") {
+        throw Error("No Username Given")
     }
 
-    const password = document.getElementById("passwordInput").innerText;
+    const password = document.getElementById("passwordInput").value;
 
+    if(password == "") {
+        throw Error("No Password Given")
+    }
+
+    const appKey = document.getElementById("apiKeyInput").value;
+
+    if(appKey == "") {
+        throw Error("No AppKey Given")
+    }
+
+    const body = {
+        UserName: username,
+        AppVersion: "1",
+        AppComments: "",
+        Password: password,
+        AppKey: appKey
+    }
+
+    const headers = {
+        "content-type": "application/json"
+    }
+
+    sendRequest(AUTHURL, "POST", headers, body, getAccountId)
+}
+
+function getAccountId(data) {
+    console.log("Resolved")
+    console.log(data)
+    
 }

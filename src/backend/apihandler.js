@@ -1,54 +1,33 @@
 /*
 
-GET Request Builder
-
-POST Request Builder
+Request Builder
 
 Query Builder
 
-
 */
 
-function sendGetRequest(url, headers, method) {
-   fetch(url, {
-        method: method,
-        headers: headers,
-        body: null
-    })
-   .then(response => {
-    if (response.ok) {
-        return response.json();
-    } else {
-        return response.json().then((errorObj) => {console.log(errorObj)});
-    }
-   })
-   .then(data => {
-    return data;
-   })
-   .catch(error => {
-    console.log(error);
-   })
-}
+function sendRequest(url, method, headers, body=null, resolve) {
 
-function sendPostRequest(url, headers, body, method) {
+    if (!(body == null)) {
+        body = JSON.stringify(body)
+    }
+
     fetch(url, {
         method: method,
         headers: headers,
-        body: json.stringify(body)
+        body: body
     })
     .then(response => {
         if (response.ok) {
-            return response.json();
+            return response.json().then((data) => {resolve(data)});
         } else {
             return response.json().then((errorObj) => {console.log(errorObj)});
         }
     })
-    .then(data => {
-        return data;
-    })
     .catch(error => {
-        console.log(error);
+        console.log(error)
     })
+
 }
 
 function buildQueryUrl(baseUrl, credentials, parameters=[]) {
