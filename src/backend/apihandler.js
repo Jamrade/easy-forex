@@ -6,7 +6,7 @@ Query Builder
 
 */
 
-function sendRequest(url, method, headers, body=null, resolve) {
+function sendRequest(url, method, resolve, headers={"content-type": "application/json"}, body=null) {
 
     if (!(body == null)) {
         body = JSON.stringify(body)
@@ -21,7 +21,7 @@ function sendRequest(url, method, headers, body=null, resolve) {
         if (response.ok) {
             return response.json().then((data) => {resolve(data)});
         } else {
-            return response.json().then((errorObj) => {console.log(errorObj)});
+            return response.json().then((errorObj) => {showError(errorObj)});
         }
     })
     .catch(error => {
@@ -48,4 +48,9 @@ function buildQueryUrl(baseUrl, credentials, parameters=[]) {
     baseUrl = baseUrl.slice(0, baseUrl.length-1)
 
     return baseUrl
+}
+
+function showError(errorObj) {
+    errorElement = document.createElement("p");
+    errorElement.innerHTML = errorObj
 }

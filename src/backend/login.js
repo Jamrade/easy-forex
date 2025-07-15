@@ -1,43 +1,17 @@
 const AUTHURL = "https://ciapi.cityindex.com/v2/Session"
 const ACCOUNTURL = "https://ciapi.cityindex.com/v2/userAccount/ClientAndTradingAccount"
 
+let sessionId = null
+let accountId = null
+let username = null
 
 const goToSignUp = () => {
     window.location.href = 'https:/www.forex.com/en-us/premium-trader-tools/api-trading/'
 }
 
-function login() {
-    new Promise(() => {
-        return credentials()
-    })
-    .then(data => {
-        let requestBody = {
-            Password: data.password,
-            AppVersion: "1",
-            AppComments: "",
-            UserName: data.UserName,
-            AppKey: data.appKey
-        }
-        return submitPostRequest(AUTHURL,)
-    })
-    .catch(error => {
-        console.log(error)
-    })
-}
-
-function makeErrorBox(text) {
-
-    const errorBox = document.createElement("p");
-
-    errorBox.innerHTML = text
-
-
-
-}
-
 function sendCredentials() {
 
-    const username = document.getElementById("usernameInput").value;
+    username = document.getElementById("usernameInput").value;
 
     if(username == "") {
         throw Error("No Username Given")
@@ -67,11 +41,28 @@ function sendCredentials() {
         "content-type": "application/json"
     }
 
-    sendRequest(AUTHURL, "POST", headers, body, getAccountId)
+    sendRequest(AUTHURL, "POST", getAccountId, headers, body)
 }
 
 function getAccountId(data) {
-    console.log("Resolved")
-    console.log(data)
+
+    sessionId = data.session
     
+    document.cookie = `session=${sessionId}; path=/`;
+
+    let url = buildQueryUrl(ACCOUNTURL, {"Username":username, "Session":sessionId})
+
+    console.log(url)
+
+    sendRequest(url, "GET", goToHomepage)
+
+}
+
+function goToHomepage(data) {
+
+    document.cookie = `accountId=${data["clientAccounts"][0].clientAccountId}; path=/`;
+
+    console.log(data["clientAccounts"][0].clientAccountId)
+
+    window.location.href = "../pages/homepage.html"
 }
