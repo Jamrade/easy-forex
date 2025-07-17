@@ -1,8 +1,6 @@
 const AUTHURL = "https://ciapi.cityindex.com/v2/Session"
-const ACCOUNTURL = "https://ciapi.cityindex.com/v2/userAccount/ClientAndTradingAccount"
 
 let sessionId = null
-let accountId = null
 let username = null
 
 const goToSignUp = () => {
@@ -12,6 +10,7 @@ const goToSignUp = () => {
 function sendCredentials() {
 
     username = document.getElementById("usernameInput").value;
+    document.cookie = `username=${username}; path:/`
 
     if(username == "") {
         throw Error("No Username Given")
@@ -49,20 +48,6 @@ function getAccountId(data) {
     sessionId = data.session
     
     document.cookie = `session=${sessionId}; path=/`;
-
-    let url = buildQueryUrl(ACCOUNTURL, {"Username":username, "Session":sessionId})
-
-    console.log(url)
-
-    sendRequest(url, "GET", goToHomepage)
-
-}
-
-function goToHomepage(data) {
-
-    document.cookie = `accountId=${data["clientAccounts"][0].clientAccountId}; path=/`;
-
-    console.log(data["clientAccounts"][0].clientAccountId)
 
     window.location.href = "../pages/homepage.html"
 }

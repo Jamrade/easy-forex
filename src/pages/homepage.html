@@ -6,28 +6,49 @@
     <title>EasyForex</title>
     <link href="../stylesheets/general.css" rel="stylesheet">
     <link href="../stylesheets/homepage.css" rel="stylesheet">
-    <script src="../backend/login.js" type="text/javascript" defer></script>
+    <script src="../backend/cookiehandler.js" type="text/javascript" defer></script>
+    <script src="../backend/apihandler.js" type="text/javascript" defer></script>
+    <script src="../backend/accounthandler.js" type="text/javascript" defer></script>
     <script src="../backend/homepage.js" type="text/javascript" defer></script>
 </head>
 <body>
-    <header>
-        <div id="headerParentDiv"></div>
+    <header id="headerContainer">
+        <div id="leftHeaderBox">
+            <img id="headerLogo" src="../assets/Header-Logo.png" alt="small Logo">
+        </div>
+        <div id="rightHeaderBox">
+            <button class="headerButton">Indicators</button>
+            <button class="headerButton">Trade</button>
+            <button class="headerButton">Markets</button>
+            <button class="headerButton">A/B Testing</button>
+        </div>
     </header>
+    <div id="welcomeBox">
+        <h1 id="welcomeTitle">Welcome, </h1>
+    </div>
     <div id="welcomeBox">
         <h2 id="welcomeText"></h2>
     </div>
     <div id="accountStatsBox">
-        <div id="marginBox" class="statsBox">
-            <h3>Available Margin</h3>
-            <p>Value</p>
+        <div id="accountBalanceBox" class="statsBox">
+            <h3 class="statsHeader">Total Account Balance</h3>
+            <p id="accountBalanceValue">Value</p>
         </div>
-        <div id="sessionBox" class="statsBox">
-            <h3>Total Margin</h3>
-            <p id="sessionValue">Value</p>
+        <div id="availableBalanceBox" class="statsBox">
+            <h3 class="statsHeader">Tradable Balance</h3>
+            <p id="availableBalanceValue">Value</p>
         </div>
-        <div id="marginBox" class="statsBox">
-            <h3>Margin Utilization</h3>
-            <p>Value</p>
+        <div id="profitLossBox" class="statsBox">
+            <h3 class="statsHeader">P/L</h3>
+            <p id="profitLossValue">Value</p>
+        </div>
+        <div id="marginUtilBox" class="statsBox">
+            <h3 class="statsHeader">Margin Utilization</h3>
+            <p id="marginUtilValue">Value</p>
+        </div>
+        <div id="utilBalanceBox" class="statsBox">
+            <h3 class="statsHeader">Currently Used Funds</h3>
+            <p id="utilBalanceValue">Value</p>
         </div>
     </div>
 </body>
